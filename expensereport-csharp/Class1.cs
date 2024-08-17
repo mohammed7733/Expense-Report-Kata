@@ -45,14 +45,14 @@ namespace expensereport_csharp
         {
             Console.WriteLine("Expenses " + DateTime.Now);
 
-            int mealExpenses = expenses.Where(expense => expense.IsMeal()).Sum(expense => expense.amount);
+            var mealExpenses = expenses.Where(expense => expense.IsMeal()).Sum(expense => expense.amount);
 
             foreach (Expense expense in expenses)
             {
                 Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + MealOverExpensesMarker(expense));
             }
 
-            int total = expenses.Sum(expense => expense.amount);
+            var total = expenses.Sum(expense => expense.amount);
 
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
@@ -60,7 +60,8 @@ namespace expensereport_csharp
 
         private static string MealOverExpensesMarker(Expense expense)
         {
-            String mealOverExpensesMarker =
+            
+            var mealOverExpensesMarker =
                 expense.IsMealOverExpense()
                     ? "X"
                     : " ";
