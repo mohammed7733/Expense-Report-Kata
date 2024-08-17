@@ -70,18 +70,22 @@ namespace expensereport_csharp
                     mealExpenses += expense.amount;
                 }
 
-                String mealOverExpensesMarker =
-                    expense.IsMealOverExpense()
-                        ? "X"
-                        : " ";
-
-                Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+                Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + MealOverExpensesMarker(expense));
 
                 total += expense.amount;
             }
 
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
+        }
+
+        private static string MealOverExpensesMarker(Expense expense)
+        {
+            String mealOverExpensesMarker =
+                expense.IsMealOverExpense()
+                    ? "X"
+                    : " ";
+            return mealOverExpensesMarker;
         }
     }
 }
