@@ -47,6 +47,11 @@ namespace expensereport_csharp
             return IsDinner() && amount > 5000 ||
                    IsBreakfast() && amount > 1000;
         }
+
+        public bool IsMeal()
+        {
+            return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
+        }
     }
 
     public class ExpenseReport
@@ -60,7 +65,7 @@ namespace expensereport_csharp
             
             foreach (Expense expense in expenses)
             {
-                if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST)
+                if (expense.IsMeal())
                 {
                     mealExpenses += expense.amount;
                 }
