@@ -58,17 +58,13 @@ namespace expensereport_csharp
         {
             Console.WriteLine("Expenses " + DateTime.Now);
 
-            var mealExpenses = expenses.MealExpenses();
-
             foreach (Expense expense in expenses.ExpensesList)
             {
                 Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + MealOverExpensesMarker(expense));
             }
 
-            var total = expenses.TotalExpenses();
-
-            Console.WriteLine("Meal expenses: " + mealExpenses);
-            Console.WriteLine("Total expenses: " + total);
+            Console.WriteLine("Meal expenses: " + expenses.MealExpenses());
+            Console.WriteLine("Total expenses: " + expenses.TotalExpenses());
         }
 
         private static string MealOverExpensesMarker(Expense expense)
