@@ -41,6 +41,12 @@ namespace expensereport_csharp
         {
             return type == ExpenseType.DINNER;
         }
+
+        public bool IsMealOverExpense()
+        {
+            return IsDinner() && amount > 5000 ||
+                   IsBreakfast() && amount > 1000;
+        }
     }
 
     public class ExpenseReport
@@ -60,8 +66,7 @@ namespace expensereport_csharp
                 }
 
                 String mealOverExpensesMarker =
-                    expense.IsDinner() && expense.amount > 5000 ||
-                    expense.IsBreakfast() && expense.amount > 1000
+                    expense.IsMealOverExpense()
                         ? "X"
                         : " ";
 
