@@ -14,34 +14,18 @@ namespace expensereport_csharp
         public ExpenseType type;
         public int amount;
 
-        public string ExpenseName()
-        {
-            String expenseName = "";
-            switch (type)
+        public string ExpenseName() =>
+            type switch
             {
-                case ExpenseType.DINNER:
-                    expenseName = "Dinner";
-                    break;
-                case ExpenseType.BREAKFAST:
-                    expenseName = "Breakfast";
-                    break;
-                case ExpenseType.CAR_RENTAL:
-                    expenseName = "Car Rental";
-                    break;
-            }
+                ExpenseType.DINNER => "Dinner",
+                ExpenseType.BREAKFAST => "Breakfast",
+                ExpenseType.CAR_RENTAL => "Car Rental",
+                _ => ""
+            };
 
-            return expenseName;
-        }
+        private bool IsBreakfast() => type == ExpenseType.BREAKFAST;
 
-        public bool IsBreakfast()
-        {
-            return type == ExpenseType.BREAKFAST;
-        }
-
-        public bool IsDinner()
-        {
-            return type == ExpenseType.DINNER;
-        }
+        private bool IsDinner() => type == ExpenseType.DINNER;
 
         public bool IsMealOverExpense()
         {
