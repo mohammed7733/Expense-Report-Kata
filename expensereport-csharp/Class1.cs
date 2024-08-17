@@ -47,6 +47,9 @@ namespace expensereport_csharp
         {
             this.ExpensesList = expensesList;
         }
+
+        public int TotalExpenses() => ExpensesList.Sum(expense => expense.amount);
+        public int MealExpenses() => ExpensesList.Where(expense => expense.IsMeal()).Sum(expense => expense.amount);
     }
 
     public class ExpenseReport
@@ -55,14 +58,14 @@ namespace expensereport_csharp
         {
             Console.WriteLine("Expenses " + DateTime.Now);
 
-            var mealExpenses = expenses.ExpensesList.Where(expense => expense.IsMeal()).Sum(expense => expense.amount);
+            var mealExpenses = expenses.MealExpenses();
 
             foreach (Expense expense in expenses.ExpensesList)
             {
                 Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + MealOverExpensesMarker(expense));
             }
 
-            var total = expenses.ExpensesList.Sum(expense => expense.amount);
+            var total = expenses.TotalExpenses();
 
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
