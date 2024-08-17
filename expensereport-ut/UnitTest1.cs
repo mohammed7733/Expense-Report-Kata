@@ -15,7 +15,7 @@ namespace Tests
             Console.SetOut(writer);
             var expenseReport = new ExpenseReport();
             var dateTime = DateTime.Now;
-            expenseReport.PrintReport(new List<Expense>());
+            expenseReport.PrintReport(new Expenses(new List<Expense>()));
             Assert.Equal($"Expenses {dateTime}\nMeal expenses: 0\nTotal expenses: 0\n", writer.ToString());
         }
 
@@ -36,7 +36,7 @@ namespace Tests
                 new() { type = ExpenseType.CAR_RENTAL, amount = 2000 },
             };
             var dateTime = DateTime.Now;
-            expenseReport.PrintReport(expenses);
+            expenseReport.PrintReport(new Expenses(expenses));
             Assert.Equal($"Expenses {dateTime}\n" +
                          $"Breakfast\t900\t \n" +
                          $"Breakfast\t1000\t \n" +

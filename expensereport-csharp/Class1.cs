@@ -39,20 +39,30 @@ namespace expensereport_csharp
         }
     }
 
+    public class Expenses
+    {
+        public readonly List<Expense> ExpensesList;
+
+        public Expenses(List<Expense> expensesList)
+        {
+            this.ExpensesList = expensesList;
+        }
+    }
+
     public class ExpenseReport
     {
-        public void PrintReport(List<Expense> expenses)
+        public void PrintReport(Expenses expenses)
         {
             Console.WriteLine("Expenses " + DateTime.Now);
 
-            var mealExpenses = expenses.Where(expense => expense.IsMeal()).Sum(expense => expense.amount);
+            var mealExpenses = expenses.ExpensesList.Where(expense => expense.IsMeal()).Sum(expense => expense.amount);
 
-            foreach (Expense expense in expenses)
+            foreach (Expense expense in expenses.ExpensesList)
             {
                 Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + MealOverExpensesMarker(expense));
             }
 
-            var total = expenses.Sum(expense => expense.amount);
+            var total = expenses.ExpensesList.Sum(expense => expense.amount);
 
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
