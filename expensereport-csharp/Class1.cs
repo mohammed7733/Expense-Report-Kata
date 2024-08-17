@@ -67,14 +67,9 @@ namespace expensereport_csharp
             Console.WriteLine("Total expenses: " + expenses.TotalExpenses());
         }
 
-        private static string MealOverExpensesMarker(Expense expense)
-        {
-            
-            var mealOverExpensesMarker =
-                expense.IsMealOverExpense()
-                    ? "X"
-                    : " ";
-            return mealOverExpensesMarker;
-        }
+        private static string MealOverExpensesMarker(Expense expense) =>
+            expense.IsMealOverExpense()
+                ? "X"
+                : " ";
     }
 }
