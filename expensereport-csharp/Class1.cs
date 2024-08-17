@@ -30,33 +30,38 @@ namespace expensereport_csharp
                     mealExpenses += expense.amount;
                 }
 
-                String expenseName = "";
-                switch (expense.type)
-                {
-                    case ExpenseType.DINNER:
-                        expenseName = "Dinner";
-                        break;
-                    case ExpenseType.BREAKFAST:
-                        expenseName = "Breakfast";
-                        break;
-                    case ExpenseType.CAR_RENTAL:
-                        expenseName = "Car Rental";
-                        break;
-                }
-
                 String mealOverExpensesMarker =
                     expense.type == ExpenseType.DINNER && expense.amount > 5000 ||
                     expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
                         ? "X"
                         : " ";
 
-                Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+                Console.WriteLine(ExpenseName(expense) + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
                 total += expense.amount;
             }
 
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
+        }
+
+        private static string ExpenseName(Expense expense)
+        {
+            String expenseName = "";
+            switch (expense.type)
+            {
+                case ExpenseType.DINNER:
+                    expenseName = "Dinner";
+                    break;
+                case ExpenseType.BREAKFAST:
+                    expenseName = "Breakfast";
+                    break;
+                case ExpenseType.CAR_RENTAL:
+                    expenseName = "Car Rental";
+                    break;
+            }
+
+            return expenseName;
         }
     }
 }
