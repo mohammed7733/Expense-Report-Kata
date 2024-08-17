@@ -33,6 +33,7 @@ namespace Tests
                 new() { type = ExpenseType.DINNER, amount = 4900 },
                 new() { type = ExpenseType.DINNER, amount = 5000 },
                 new() { type = ExpenseType.DINNER, amount = 5100 },
+                new() { type = ExpenseType.CAR_RENTAL, amount = 2000 },
             };
             var dateTime = DateTime.Now;
             expenseReport.PrintReport(expenses);
@@ -43,8 +44,9 @@ namespace Tests
                          $"Dinner\t4900\t \n" +
                          $"Dinner\t5000\t \n" +
                          $"Dinner\t5100\tX\n" +
+                         $"Car Rental\t2000\t \n" +
                          $"Meal expenses: 18000\n" +
-                         $"Total expenses: 18000\n", writer.ToString());
+                         $"Total expenses: 20000\n", writer.ToString());
         }
     }
 }
