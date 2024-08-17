@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace expensereport_csharp
 {
@@ -58,22 +59,16 @@ namespace expensereport_csharp
     {
         public void PrintReport(List<Expense> expenses)
         {
-            int total = 0;
-            int mealExpenses = 0;
-
             Console.WriteLine("Expenses " + DateTime.Now);
-            
+
+            int mealExpenses = expenses.Where(expense => expense.IsMeal()).Sum(expense => expense.amount);
+
             foreach (Expense expense in expenses)
             {
-                if (expense.IsMeal())
-                {
-                    mealExpenses += expense.amount;
-                }
-
                 Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + MealOverExpensesMarker(expense));
-
-                total += expense.amount;
             }
+
+            int total = expenses.Sum(expense => expense.amount);
 
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
