@@ -9,7 +9,7 @@ namespace expensereport_csharp
         DINNER, BREAKFAST, CAR_RENTAL
     }
 
-    public class Expense
+    public class ExpenseToRemove
     {
         public ExpenseType type;
         public int amount;
@@ -41,9 +41,9 @@ namespace expensereport_csharp
 
     public class Expenses
     {
-        public readonly List<Expense> ExpensesList;
+        public readonly List<ExpenseToRemove> ExpensesList;
 
-        public Expenses(List<Expense> expensesList)
+        public Expenses(List<ExpenseToRemove> expensesList)
         {
             this.ExpensesList = expensesList;
         }
@@ -70,8 +70,8 @@ namespace expensereport_csharp
             }
         }
 
-        private static string MealOverExpensesMarker(Expense expense) =>
-            expense.IsMealOverExpense()
+        private static string MealOverExpensesMarker(ExpenseToRemove expenseToRemove) =>
+            expenseToRemove.IsMealOverExpense()
                 ? "X"
                 : " ";
     }
