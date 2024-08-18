@@ -35,7 +35,7 @@ namespace expensereport_csharp
 
         public bool IsMeal()
         {
-            return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
+            return type is ExpenseType.DINNER or ExpenseType.BREAKFAST;
         }
     }
 
@@ -57,14 +57,17 @@ namespace expensereport_csharp
         public void PrintReport(Expenses expenses)
         {
             Console.WriteLine("Expenses " + DateTime.Now);
+            PrintExpenses(expenses);
+            Console.WriteLine("Meal expenses: " + expenses.MealExpenses());
+            Console.WriteLine("Total expenses: " + expenses.TotalExpenses());
+        }
 
-            foreach (Expense expense in expenses.ExpensesList)
+        private static void PrintExpenses(Expenses expenses)
+        {
+            foreach (var expense in expenses.ExpensesList)
             {
                 Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + MealOverExpensesMarker(expense));
             }
-
-            Console.WriteLine("Meal expenses: " + expenses.MealExpenses());
-            Console.WriteLine("Total expenses: " + expenses.TotalExpenses());
         }
 
         private static string MealOverExpensesMarker(Expense expense) =>
