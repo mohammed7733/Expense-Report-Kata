@@ -15,7 +15,7 @@ namespace Tests
             Console.SetOut(writer);
             var expenseReport = new ExpenseReport();
             var dateTime = DateTime.Now;
-            expenseReport.PrintReport(new Expenses(new List<ExpenseToRemove>()));
+            expenseReport.PrintReport(new Expenses(new List<Expense>()));
             Assert.Equal($"Expenses {dateTime}\nMeal expenses: 0\nTotal expenses: 0\n", writer.ToString());
         }
 
@@ -25,15 +25,15 @@ namespace Tests
             StringWriter writer = new StringWriter();
             Console.SetOut(writer);
             var expenseReport = new ExpenseReport();
-            var expenses = new List<ExpenseToRemove>
+            var expenses = new List<Expense>
             {
-                new() { type = ExpenseType.BREAKFAST, amount = 900 },
-                new() { type = ExpenseType.BREAKFAST, amount = 1000 },
-                new() { type = ExpenseType.BREAKFAST, amount = 1100 },
-                new() { type = ExpenseType.DINNER, amount = 4900 },
-                new() { type = ExpenseType.DINNER, amount = 5000 },
-                new() { type = ExpenseType.DINNER, amount = 5100 },
-                new() { type = ExpenseType.CAR_RENTAL, amount = 2000 },
+                new Breakfast(900),
+                new Breakfast(1000),
+                new Breakfast(1100),
+                new Dinner(4900),
+                new Dinner(5000),
+                new Dinner(5100),
+                new CarRental(2000)
             };
             var dateTime = DateTime.Now;
             expenseReport.PrintReport(new Expenses(expenses));

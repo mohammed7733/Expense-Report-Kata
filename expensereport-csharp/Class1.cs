@@ -9,36 +9,6 @@ namespace expensereport_csharp
         DINNER, BREAKFAST, CAR_RENTAL
     }
 
-    public class ExpenseToRemove
-    {
-        public ExpenseType type;
-        public int amount;
-
-        public string ExpenseName() =>
-            type switch
-            {
-                ExpenseType.DINNER => "Dinner",
-                ExpenseType.BREAKFAST => "Breakfast",
-                ExpenseType.CAR_RENTAL => "Car Rental",
-                _ => ""
-            };
-
-        private bool IsBreakfast() => type == ExpenseType.BREAKFAST;
-
-        private bool IsDinner() => type == ExpenseType.DINNER;
-
-        public bool IsMealOverExpense()
-        {
-            return IsDinner() && amount > 5000 ||
-                   IsBreakfast() && amount > 1000;
-        }
-
-        public bool IsMeal()
-        {
-            return type is ExpenseType.DINNER or ExpenseType.BREAKFAST;
-        }
-    }
-
     public abstract class Expense
     {
         public int Amount;
@@ -91,15 +61,15 @@ namespace expensereport_csharp
 
     public class Expenses
     {
-        public readonly List<ExpenseToRemove> ExpensesList;
+        public readonly List<Expense> ExpensesList;
 
-        public Expenses(List<ExpenseToRemove> expensesList)
+        public Expenses(List<Expense> expensesList)
         {
             this.ExpensesList = expensesList;
         }
 
-        public int TotalExpenses() => ExpensesList.Sum(expense => expense.amount);
-        public int MealExpenses() => ExpensesList.Where(expense => expense.IsMeal()).Sum(expense => expense.amount);
+        public int TotalExpenses() => ExpensesList.Sum(expense => expense.Amount);
+        public int MealExpenses() => ExpensesList.Where(expense => expense.IsMeal()).Sum(expense => expense.Amount);
     }
 
     public class ExpenseReport
@@ -116,12 +86,12 @@ namespace expensereport_csharp
         {
             foreach (var expense in expenses.ExpensesList)
             {
-                Console.WriteLine(expense.ExpenseName() + "\t" + expense.amount + "\t" + MealOverExpensesMarker(expense));
+                Console.WriteLine(expense.Name() + "\t" + expense.Amount + "\t" + MealOverExpensesMarker(expense));
             }
         }
 
-        private static string MealOverExpensesMarker(ExpenseToRemove expenseToRemove) =>
-            expenseToRemove.IsMealOverExpense()
+        private static string MealOverExpensesMarker(Expense expense) =>
+            expense.IsOverExpense()
                 ? "X"
                 : " ";
     }
