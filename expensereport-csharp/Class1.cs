@@ -4,11 +4,6 @@ using System.Linq;
 
 namespace expensereport_csharp
 {
-    public enum ExpenseType
-    {
-        DINNER, BREAKFAST, CAR_RENTAL
-    }
-
     public abstract class Expense
     {
         public int Amount;
