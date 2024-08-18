@@ -39,6 +39,56 @@ namespace expensereport_csharp
         }
     }
 
+    public abstract class Expense
+    {
+        public int Amount;
+        public abstract string Name();
+        public abstract bool IsMeal();
+        public abstract bool IsOverExpense();
+    }
+
+    public class Breakfast : Expense
+    {
+        public Breakfast(int amount)
+        {
+            Amount = amount;
+        }
+
+        public override string Name() => "Breakfast";
+
+        public override bool IsMeal() => true;
+
+        public override bool IsOverExpense() => Amount > 1000;
+    }
+
+    public class Dinner : Expense
+    {
+        public Dinner(int amount)
+        {
+            Amount = amount;
+        }
+
+        public override string Name() => "Dinner";
+
+        public override bool IsMeal() => true;
+
+        public override bool IsOverExpense() => Amount > 5000;
+    }
+
+    public class CarRental : Expense
+    {
+        public CarRental(int amount)
+        {
+            Amount = amount;
+        }
+
+        public override string Name() => "Car Rental";
+
+        public override bool IsMeal() => false;
+
+        public override bool IsOverExpense() => false;
+    }
+
     public class Expenses
     {
         public readonly List<ExpenseToRemove> ExpensesList;
