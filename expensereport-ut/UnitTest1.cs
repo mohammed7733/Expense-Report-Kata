@@ -33,7 +33,10 @@ namespace Tests
                 new Dinner(4900),
                 new Dinner(5000),
                 new Dinner(5100),
-                new CarRental(2000)
+                new CarRental(2000),
+                new Lunch(2900),
+                new Lunch(3000),
+                new Lunch(3100),
             };
             var dateTime = DateTime.Now;
             expenseReport.PrintReport(new Expenses(expenses));
@@ -45,8 +48,11 @@ namespace Tests
                          $"Dinner\t5000\t \n" +
                          $"Dinner\t5100\tX\n" +
                          $"Car Rental\t2000\t \n" +
-                         $"Meal expenses: 18000\n" +
-                         $"Total expenses: 20000\n", writer.ToString());
+                         $"Lunch\t2900\t \n" +
+                         $"Lunch\t3000\t \n" +
+                         $"Lunch\t3100\tX\n" +
+                         $"Meal expenses: 27000\n" +
+                         $"Total expenses: 29000\n", writer.ToString());
         }
     }
 }
