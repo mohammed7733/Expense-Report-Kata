@@ -19,12 +19,26 @@ namespace Tests
             Assert.Equal($"Expenses {dateTime}\nMeal expenses: 0\nTotal expenses: 0\n", writer.ToString());
         }
 
+        [Theory]
+        [InlineData(900, false)]
+        [InlineData(1000, false)]
+        [InlineData(1100, true)]
+        public void NewBreakfast_InitiatedAsExpected(int amount, bool isOverExpense)
+        {
+            var breakfast = new Breakfast(amount);
+            Assert.Equal(amount, breakfast.Amount);
+            Assert.Equal("Breakfast", breakfast.Name());
+            Assert.True(breakfast.IsMeal());
+            Assert.Equal(isOverExpense, breakfast.IsOverExpense());
+        }
+        
         [Fact]
         public void PrintReport_WithExpenses_WorkAsExpected()
         {
             StringWriter writer = new StringWriter();
             Console.SetOut(writer);
             var expenseReport = new ExpenseReport();
+            //TODO: I can separate tests (tests for breakfast, others for dinner, and so on ..)
             var expenses = new List<Expense>
             {
                 new Breakfast(900),
